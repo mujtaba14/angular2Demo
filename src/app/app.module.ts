@@ -9,6 +9,8 @@ import { HomeComponent } from './home/home.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import {MyServiceService} from './my-service.service'
+import { HttpClientModule } from '@angular/common/http';
+import { Http } from '@angular/http';
 
 
 const routeApp :Routes = [
@@ -28,7 +30,10 @@ const routeApp :Routes = [
   imports: [
     BrowserModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(routeApp)
+    RouterModule.forRoot(routeApp),
+    HttpClientModule,
+    Http
+    
   ],
   providers: [MyServiceService],
   bootstrap: [AppComponent]
