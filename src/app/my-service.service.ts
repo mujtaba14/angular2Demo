@@ -27,7 +27,7 @@ export class MyServiceService {
     //return this.data;
     return this.http
     .get('http://localhost:3000/getEmpData')
-    .map(x => x.json)
+    .map(x => x.json())
   }
   addData(data:any){
     // this.data.push(
@@ -37,6 +37,14 @@ export class MyServiceService {
     //   password:data.password
 
     // })
+
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    this.http.post('http://localhost:3000/addEmpData', data, {headers}).subscribe(
+      data =>{
+
+      }
+    );
   }
   delete(i:number){
   //  let Edata=this.data.splice(i, 1);

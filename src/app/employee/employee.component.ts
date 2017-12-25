@@ -13,6 +13,7 @@ export class EmployeeComponent implements OnInit {
   //data:any;
  
   constructor(private fb: FormBuilder,private _myService:MyServiceService) {
+    //_myService.getEmpData().subscribe(result => this.EmpArr = JSON.parse(result.data)
     _myService.getEmpData().subscribe(result => this.EmpArr = JSON.parse(result.data)
     // this.myForm = this.fb.group({
     //   'name': ['', Validators.required],
@@ -44,7 +45,7 @@ export class EmployeeComponent implements OnInit {
 
   register(data:any){
    this._myService.addData(this.myForm.value);
-  //  console.log("values are=================>",this.myForm.value);
+    console.log("values are=================>",this.myForm.value);
     }
     removeData(i:number){
       let test=this._myService.delete(i);

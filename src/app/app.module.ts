@@ -10,7 +10,7 @@ import { EmployeeComponent } from './employee/employee.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import {MyServiceService} from './my-service.service'
 import { HttpClientModule } from '@angular/common/http';
-import { Http } from '@angular/http';
+import { HttpModule } from '@angular/http';
 
 
 const routeApp :Routes = [
@@ -32,7 +32,7 @@ const routeApp :Routes = [
     ReactiveFormsModule,
     RouterModule.forRoot(routeApp),
     HttpClientModule,
-    Http
+    HttpModule
     
   ],
   providers: [MyServiceService],
