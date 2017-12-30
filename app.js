@@ -42,21 +42,40 @@ app.get('/getEmpData', (req, res) => {
 })
 
 app.post('/addEmpData', function (req, res) {
-  //console.log("req.body=====>", req.body);
+  console.log("req.body=====>", req.body);
   if (req.body) {
-    //var configFile = fs.readFileSync('./src/assets/my_json_file.json', 'utf8');
-    var configFile = fs.readFileSync( './src/assets/my_json_file.json', function(err, data) { console.log( data.toString() ); });
-    console.log("config file=====>", configFile);
+    var configFile = fs.readFileSync('./src/assets/my_json_file.json','utf8');
     var config = JSON.parse(configFile);
     config.push(req.body);
     var configJSON = JSON.stringify(config);
-    fs.writeFileSync('./src/assets/my_json_file.json',configFile.join(','),'utf8', configJSON, function (err) {
+    fs.writeFileSync('./src/assets/my_json_file.json', configJSON,'utf8', function (err) {
       if (err) {
         console.log("inside error");
         res.json({ code: 400, message: "error" });
       } else {
         console.log("saved data");
         res.json({ code: 200, message: "success" });
+      }
+    });
+
+  }
+})
+
+app.post('/removeData', function (req, res) {
+  console.log("request.body------>",req.body);
+  if (req.body) {
+    var configFile = fs.readFileSync('./src/assets/my_json_file.json','utf8');
+    var config = JSON.parse(configFile);
+    // config.pop(req.body.i);
+    config.splice(req.body.i, 1);
+    console.log("index data========>", req.body.i)
+    var configJSON = JSON.stringify(config);
+    fs.writeFileSync('./src/assets/my_json_file.json','utf8', configJSON, function (err) {
+      if (err) {
+        return console.log(err);
+      } else {
+        console.log("deleted record successfully");
+        res.json({ code: 201, message: "success" });
       }
     });
 

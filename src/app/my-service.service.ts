@@ -11,6 +11,7 @@ export class MyServiceService {
   constructor(private http:Http) { }
 
   _data:any[];
+  response:any ={};
   // data:any = [
   //   {
   //     'name':'Mujtaba Bhat',
@@ -46,11 +47,18 @@ export class MyServiceService {
       }
     );
   }
-  delete(i:number){
-  //  let Edata=this.data.splice(i, 1);
-  //  console.log("deleted value are========>",Edata);
-   
+  removeData(i: number) {
+    // this._data.splice(i, 1);
+    //this.toastr.warning(`Record updated successfully `);
+    if (window.confirm('Are you want to delete this item')) {
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      this.http.post('http://localhost:3000/removeData', { i: i }, { headers }).subscribe(data => {
+         console.log(data.json);
+       // this.response = data.json();
 
+      })
+    }
   }
 
 }

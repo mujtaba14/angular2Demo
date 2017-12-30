@@ -47,8 +47,8 @@ export class EmployeeComponent implements OnInit {
    this._myService.addData(this.myForm.value);
     console.log("values are=================>",this.myForm.value);
     }
-    removeData(i:number){
-      let test=this._myService.delete(i);
+    deleteEmp(i:number){
+      let test=this._myService.removeData(i);
       console.log("the values are==================>",test);
 
     }
