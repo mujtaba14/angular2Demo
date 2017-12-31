@@ -82,9 +82,36 @@ app.post('/removeData', function (req, res) {
   }
 })
 
+app.post('/updateEmp', function (req, res) {
+  //console.log(req.body)
+  if (req.body) {
+    var configFile = fs.readFileSync('./src/assets/my_json_file.json');
+    var config = JSON.parse(configFile);
+    let index = config.map(obj => obj.name).indexOf(req.body.name);
+    if (index > -1 && req.body.index !== index) {
+      res.json({ message: "name should be unique", code: "error", Headers: "Access-Control-Allow-Origin: *" })
+    } else {
+      // config.splice(req.body.index, 1);
+      //config.push(req.body);
+      config[req.body.index]  =  req.body;
+      var configJSON = JSON.stringify(config);
+      fs.writeFileSync('./src/assets/my_json_file.json', configJSON, function (err) {
+        if (err) {
+          return console.log(err);
+        } else {
+          res.json({ code: 201, message: "success" });
+        }
+      });
+    }
+  }
+})
+
   app.get('/', (req, res) => {
   res.sendFile(__dirname + '/src/index.html');
   console.log("inside");
+})
+app.get('/deleteEmp/:index', function (req, res) {
+  console.log("called deleteEmp", req.param.index);
 })
   app.listen(3000, function () {
     console.log('Example app listening on port 3000!');

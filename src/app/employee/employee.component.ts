@@ -10,7 +10,8 @@ import {MyServiceService} from '../my-service.service'
 export class EmployeeComponent implements OnInit {
   myForm: any;
   EmpArr:any[];
-  //data:any;
+  data:any;
+  index:number;
  
   constructor(private fb: FormBuilder,private _myService:MyServiceService) {
     //_myService.getEmpData().subscribe(result => this.EmpArr = JSON.parse(result.data)
@@ -43,12 +44,18 @@ export class EmployeeComponent implements OnInit {
     }
   }
 
+  updateEmp(index:number) {
+    this.index = this.EmpArr.findIndex(x => x.name = this.data.name);
+   console.log("index==========>", index);
+   this._myService.updateEmp(this.myForm.value, index);
+
+ }
   register(data:any){
    this._myService.addData(this.myForm.value);
     console.log("values are=================>",this.myForm.value);
     }
     deleteEmp(i:number){
-      let test=this._myService.removeData(i);
+      let test= this._myService.removeData(i);
       console.log("the values are==================>",test);
 
     }

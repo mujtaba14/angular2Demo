@@ -12,6 +12,7 @@ export class MyServiceService {
 
   _data:any[];
   response:any ={};
+  error:string;
   // data:any = [
   //   {
   //     'name':'Mujtaba Bhat',
@@ -54,11 +55,26 @@ export class MyServiceService {
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
       this.http.post('http://localhost:3000/removeData', { i: i }, { headers }).subscribe(data => {
-         console.log(data.json);
+         console.log(data.json());
        // this.response = data.json();
 
       })
     }
+  }
+
+  updateEmp(_data:any,index:number){
+    _data.index = index;
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    this.http.post('http://localhost:3000/updateEmp',  _data , { headers }).subscribe(data => {
+      console.log(data.json());
+      if (data.json().code == "error") {
+        this.error = "Name should be unique";
+      }
+    // this.response = data.json();
+
+   })
+
   }
 
 }
