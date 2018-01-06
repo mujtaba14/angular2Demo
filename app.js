@@ -70,7 +70,7 @@ app.post('/removeData', function (req, res) {
     config.splice(req.body.i, 1);
     console.log("index data========>", req.body.i)
     var configJSON = JSON.stringify(config);
-    fs.writeFileSync('./src/assets/my_json_file.json','utf8', configJSON, function (err) {
+    fs.writeFile('./src/assets/my_json_file.json', configJSON, function (err) {
       if (err) {
         return console.log(err);
       } else {
@@ -83,9 +83,9 @@ app.post('/removeData', function (req, res) {
 })
 
 app.post('/updateEmp', function (req, res) {
-  //console.log(req.body)
+  console.log(req.body)
   if (req.body) {
-    var configFile = fs.readFileSync('./src/assets/my_json_file.json');
+    var configFile = fs.readFileSync('./src/assets/my_json_file.json','utf8');
     var config = JSON.parse(configFile);
     let index = config.map(obj => obj.name).indexOf(req.body.name);
     if (index > -1 && req.body.index !== index) {
@@ -95,7 +95,7 @@ app.post('/updateEmp', function (req, res) {
       //config.push(req.body);
       config[req.body.index]  =  req.body;
       var configJSON = JSON.stringify(config);
-      fs.writeFileSync('./src/assets/my_json_file.json', configJSON, function (err) {
+      fs.writeFile('./src/assets/my_json_file.json', configJSON, function (err) {
         if (err) {
           return console.log(err);
         } else {

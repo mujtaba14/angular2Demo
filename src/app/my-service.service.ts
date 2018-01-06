@@ -63,6 +63,8 @@ export class MyServiceService {
   }
 
   updateEmp(_data:any,index:number){
+    console.log("_data.index value",_data);
+    console.log("index value",index);
     _data.index = index;
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');

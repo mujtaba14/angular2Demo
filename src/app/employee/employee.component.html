@@ -39,7 +39,8 @@
   <div class="row">
     <div class="col-sm-3"></div>
     <div class="col-sm-6">
-      <button type="submit" class="btn btn-success" [disabled]="!myForm.valid" (click)="register()">Submit</button>
+      <button type="submit" class="btn btn-success" *ngIf="!is_upadte" [disabled]="!myForm.valid" (click)="register()">Register</button>
+      <button type="submit" class="btn btn-success" *ngIf="is_upadte" [disabled]="!myForm.valid" (click)="updateEmp()">Update</button>
     </div>
 
   </div>
@@ -57,13 +58,13 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let emp of EmpArr">
+      <tr *ngFor="let emp of EmpArr let i=index">
         <td>{{emp.name}}</td>
         <td>{{emp.email}}</td>
         <td>{{emp.password}}</td>
         <td>
           <button type="submit" class="btn btn-danger" (click)="deleteEmp(i)">Del</button>
-          <button type="submit" class="btn btn-primary" (click)="updateEmp(emp)">Edit</button>
+          <button type="submit" class="btn btn-primary" (click)="editEmp(emp)">Edit</button>
         </td>
 
       </tr>
